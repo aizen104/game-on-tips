@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Game On Tips{% endblock %}
+
+{% block content %}
+<h1 class="main-title">Game On Tips</h1>
+{% if session.get("admin") %}
+  <div style="margin:20px; text-align:center;">
+    <a href="/admin" class="button admin-btn">Go to Admin Dashboard</a>
+  </div>
+{% endif %}
+<p class="status-text">System running successfully.</p>
+
+<div class="plans">
+
+    <div class="plan-card">
+        <h2>Ordinary Tips</h2>
+        <p>Reliable daily tips for consistent wins.</p>
+        <a href="/subscribe?plan=ordinary" class="button">Subscribe</a>
+    </div>
+
+    <div class="plan-card vip">
+        <h2>VIP Tips</h2>
+        <p>High-confidence expert predictions.</p>
+        <a href="/subscribe?plan=vip" class="button vip-btn">Go VIP</a>
+    </div>
+
+</div>
+
+{% if is_subscribed %}
+    <h2 class="section-title">Upcoming Matches</h2>
+
+    {% if matches %}
+        {% for match in matches %}
+            <div class="match-card">
+                {{ match.home_team }} vs {{ match.away_team }} —
+                {{ match.kickoff_time.strftime("%d %b %Y %H:%M") }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No upcoming matches.</p>
+    {% endif %}
+{% else %}
+    <div class="locked">
+        <h3>🔒 Upcoming Matches Locked</h3>
+        <p>Subscribe to view upcoming matches and predictions.</p>
+    </div>
+{% endif %}
+
+{% endblock %}
+

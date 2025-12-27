@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Game On Tips{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="title">GAME ON TIPS</h1>
+    <p class="subtitle">Daily Betting Tips • Smart Wins • Trusted Picks</p>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <div class="cards">
+        <a href="/subscribe?plan=ordinary" class="card ordinary">
+            <h2>ORDINARY</h2>
+            <p class="price">30,000 UGX</p>
+            <p>
+                Daily tips<br>
+                Limited selections<br>
+                Paid access
+            </p>
+        </a>
+
+        <a href="/subscribe?plan=vip" class="card vip">
+            <h2>VIP</h2>
+            <p class="price">50,000 UGX</p>
+            <p>
+                Premium daily tips<br>
+                Higher accuracy<br>
+                7-day history<br>
+                Priority access
+            </p>
+            <span class="badge">BEST VALUE</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
+

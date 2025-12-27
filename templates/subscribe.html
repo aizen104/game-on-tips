@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Subscribe{% endblock %}
+
+{% block content %}
+<h1>{{ plan|capitalize }} Subscription</h1>
+
+<p>Price: <strong>{{ price }}</strong></p>
+
+<p>Please complete payment to unlock {{ plan }} tips.</p>
+
+<button class="button">Proceed to Payment</button>
+<h2>{{ plan|upper }} Subscription</h2>
+<p>Price: {{ price }}</p>
+
+<button onclick="makePayment()">Pay Now</button>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+function makePayment() {
+  FlutterwaveCheckout({
+    public_key: "{{ flw_public }}",
+    tx_ref: "tx_" + Date.now(),
+    amount: {{ amount }},
+    currency: "UGX",
+    payment_options: "mobilemoneyuganda",
+    customer: {
+      email: "user@email.com",
+      phone_number: "0700000000",
+      name: "Game On User"
+    },
+    callback: function (data) {
+      window.location.href = "/verify-payment?tx_id=" + data.transaction_id + "&plan={{ plan }}";
+    },
+    customizations: {
+      title: "Game On Tips",
+      description: "{{ plan }} Subscription",
+    },
+  });
+}
+{% endblock %}
+</script>
+

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+{% if tips %}
+  <ul>
+    {% for tip in tips %}
+      <li>
+        {{ tip.match.home_team }} vs {{ tip.match.away_team }} –
+        {{ tip.prediction }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No tips available.</p>
+{% endif %}
+
+{% endblock %}
+

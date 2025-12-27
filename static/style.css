@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: #0f0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.title {
+    font-size: 48px;
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #9f9;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 260px;
+    padding: 30px;
+    border: 2px solid #0f0;
+    text-decoration: none;
+    color: #0f0;
+    transition: all 0.3s ease;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.card:hover {
+    background: #0f0;
+    color: #000;
+    transform: translateY(-5px);
+}
+
+.vip {
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.ordinary {
+    opacity: 0.85;
+}
+
+.price {
+    font-size: 22px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 6px 12px;
+    background: #0f0;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.vip {
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
+    transform: scale(1.05);
+}
+
+.vip:hover {
+    transform: scale(1.08);
+}
+.bet-card {
+    border: 1px solid #0f0;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #111;
+}
+
+.match {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.market {
+    font-size: 14px;
+    color: #9f9;
+}
+
+.odds {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.odds span {
+    background: #0f0;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+/* GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* BODY */
+body {
+    background: #000;
+    color: #0f0;
+    padding: 20px;
+}
+
+/* HEADINGS */
+h1, h2, h3 {
+    color: #0f0;
+    margin-bottom: 15px;
+}
+
+/* LINKS */
+a {
+    color: #0f0;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* CONTAINERS / CARDS */
+.card, .bet-card, form, div {
+    background: #111;
+    border: 1px solid #0f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* FORMS */
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    background: #000;
+    border: 1px solid #0f0;
+    color: #0f0;
+    border-radius: 5px;
+}
+
+input::placeholder {
+    color: #6f6;
+}
+
+/* BUTTONS */
+button {
+    background: #0f0;
+    color: #000;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6f6;
+}
+
+/* BET TIP STYLE */
+.bet-card {
+    box-shadow: 0 0 10px rgba(0,255,0,0.2);
+}
+
+.market {
+    font-size: 14px;
+    color: #9f9;
+}
+
+.odds span {
+    background: #0f0;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* FOOTER TEXT */
+small {
+    color: #7f7;
+}
+.plans {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.plan-card {
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    background: #050505;
+}
+
+.plan-card.vip {
+    border-color: gold;
+}
+
+.plan-card h2 {
+    color: #00ff00;
+}
+
+.plan-card.vip h2 {
+    color: gold;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.vip-btn {
+    border-color: gold;
+    color: gold;
+}
+
+.match-card {
+    border: 1px solid #00ff00;
+    padding: 10px;
+    margin: 10px auto;
+    width: 60%;
+    border-radius: 6px;
+}
+
+.locked {
+    text-align: center;
+    border: 1px dashed #00ff00;
+    padding: 20px;
+    margin-top: 30px;
+}
+.match-box {
+  border: 1px solid #00ff00;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.match-box h4 {
+  color: #00ff00;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 4px 0;
+}
+.admin-btn {
+    display: inline-block;
+    background: #00ff66;
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    float: right;
+    margin-top: -40px;
+}
+
+.admin-btn:hover {
+    background: #00cc55;
+}
+.admin-btn {
+  background: #ff9800;
+  color: black;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+

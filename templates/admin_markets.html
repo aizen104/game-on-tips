@@ -1,0 +1,45 @@
+{% extends "admin.html" %}
+{% block content %}
+
+<h2>Add Market</h2>
+
+<form method="POST">
+  <select name="match_id" required>
+    {% for match in matches %}
+      <option value="{{ match.id }}">
+        {{ match.home_team }} vs {{ match.away_team }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <input type="text" name="market" placeholder="Market (e.g Over 2.5)" required>
+  <input type="text" name="pick" placeholder="Pick (e.g Over)" required>
+  <input type="number" step="0.01" name="odds" placeholder="Odds" required>
+
+  <button type="submit">Add Market</button>
+</form>
+
+<hr>
+
+<h2>Markets</h2>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Match</th>
+    <th>Market</th>
+    <th>Pick</th>
+    <th>Odds</th>
+  </tr>
+  {% for m in markets %}
+  <tr>
+    <td>{{ m.id }}</td>
+    <td>{{ m.match.home_team }} vs {{ m.match.away_team }}</td>
+    <td>{{ m.market }}</td>
+    <td>{{ m.pick }}</td>
+    <td>{{ m.odds }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
+
