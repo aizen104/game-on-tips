@@ -8,6 +8,7 @@ import os, requests
 from models import db, User, Match, Market, Tip
 
 app = Flask(__name__)
+PESAPAL_ENV = os.getenv("PESAPAL_ENV", "sandbox")
 
 app.config["SECRET_KEY"] = "supersecret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///game_on_tips.db"
@@ -20,6 +21,7 @@ login_manager.init_app(app)
 login_manager.login_view = "login"
 
 load_dotenv()
+
 
 PESAPAL_CONSUMER_KEY = os.getenv("gFgd8p32X38EdnBUbwx6fIwKGTsO36db")
 PESAPAL_CONSUMER_SECRET = os.getenv("KhEhrvluXyrpSgZ7eLGciBbKiHQ=")
@@ -54,23 +56,6 @@ def auto_close_matches():
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-@app.route("/")
-def home():
-   # auto_close_matches()
-
-    subscribed = session.get("subscribed", False)
-
-    matches = []
-    if subscribed:
-        matches = Match.query.filter_by(is_active=True).all()
-
-    return render_template(
-        "index.html",
-        matches=matches,
-        subscribed=subscribed
-    )
-
 
 @app.route("/ordinary")
 def ordinary():
@@ -178,7 +163,6 @@ def subscribe():
         public_key=FLW_PUBLIC_KEY
     )
 
-
 @app.route("/admin/toggle/<int:match_id>")
 def toggle_match(match_id):
     if not session.get("admin"):
@@ -239,14 +223,234 @@ def register_ipn():
     return data["ipn_id"]
 
 
+# =========================
+# ENVIRONMENT CONFIG
+# =========================
+import os
+
+PESAPAL_ENV = os.getenv("PESAPAL_ENV", "sandbox")
+
 if PESAPAL_ENV == "sandbox":
     AUTH_URL = "https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken"
 else:
     AUTH_URL = "https://pay.pesapal.com/v3/api/Auth/RequestToken"
 
 
+# =========================
+# COMING SOON MODE
+# =========================
+COMING_SOON = True  # change to False when ready
+@app.route("/")
+def index():
+    return """
+<!DOCTYPE html>
+<html>
+<head>
+<title>Game On Tips</title>
+<style>
+    body {
+        margin: 0;
+        background: #0b0f0c;
+        color: #00ff66;
+        font-family: Arial, sans-serif;
+    }
+
+    nav {
+        padding: 10px 20px;
+        border-bottom: 1px solid #00ff66;
+    }
+
+    nav a {
+        color: #00ff66;
+        margin-right: 15px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        border: 1px solid #00ff66;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #00ff6655;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .status {
+        text-align: center;
+        color: #7fffaf;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .cards {
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+    }
+
+    .card {
+        width: 300px;
+        padding: 25px;
+        border-radius: 10px;
+        border: 2px solid #00ff66;
+        text-align: center;
+        box-shadow: 0 0 15px #00ff6640;
+    }
+
+    .vip {
+        border-color: #ffff00;
+        box-shadow: 0 0 15px #ffff0040;
+        color: #ffffaa;
+    }
+
+    .card h2 {
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        font-size: 14px;
+        color: #aaffcc;
+    }
+
+    .vip p {
+        color: #ffffcc;
+    }
+
+    .btn {
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: transparent;
+        border: 1px solid #00ff66;
+        color: #00ff66;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    .vip .btn {
+        border-color: #ffff00;
+        color: #ffff00;
+    }
+
+    .btn:hover {
+        background: #00ff6620;
+    }
+
+    .locked {
+        margin-top: 40px;
+        padding: 15px;
+        border: 1px dashed #00ff66;
+        text-align: center;
+        color: #7fffaf;
+        font-size: 13px;
+    }
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/subscribe/ordinary">Ordinary Tips</a>
+    <a href="/subscribe/vip">VIP Tips</a>
+    <a href="/admin">Admin</a>
+</nav>
+
+<div class="container">
+    <h1>Game On Tips</h1>
+    <div class="status">System running successfully.</div>
+
+    <div class="cards">
+        <div class="card">
+            <h2>Ordinary Tips</h2>
+            <p>Reliable daily tips for consistent wins.</p>
+            <form action="/subscribe/ordinary">
+                <button class="btn">Subscribe</button>
+            </form>
+        </div>
+
+        <div class="card vip">
+            <h2>VIP Tips</h2>
+            <p>High-confidence expert predictions.</p>
+            <form action="/subscribe/vip">
+                <button class="btn">Go VIP</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="locked">
+        🔒 Upcoming Matches Locked<br>
+        Subscribe to view upcoming matches and predictions.
+    </div>
+</div>
+
+</body>
+</html>
+"""
+
+@app.route("/subscribe/ordinary")
+def ordinary_coming_soon():
+    return """
+    <html>
+    <head>
+    <title>Ordinary – Coming Soon</title>
+    <style>
+        body {
+            background: #0b0f0c;
+            color: #00ff66;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
+    </head>
+    <body>
+        <div>
+            <h1>🎮 Ordinary Tips</h1>
+            <p>Coming soon.</p>
+        </div>
+    </body>
+    </html>
+    """
+@app.route("/subscribe/vip")
+def vip_coming_soon():
+    return """
+    <html>
+    <head>
+    <title>VIP – Coming Soon</title>
+    <style>
+        body {
+            background: #0b0f0c;
+            color: #ffff00;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+    </style>
+    </head>
+    <body>
+        <div>
+            <h1>🚀 VIP Tips</h1>
+            <p>Coming soon.</p>
+        </div>
+    </body>
+    </html>
+    """
+
+import os
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-
-
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
 
