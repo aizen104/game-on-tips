@@ -1,0 +1,13 @@
+<h2>{{ plan|capitalize }} Subscription</h2>
+
+{% if plan == "ordinary" %}
+<p>Price: UGX 30,000</p>
+{% else %}
+<p>Price: UGX 50,000</p>
+{% endif %}
+
+<button class="button">Pay with MTN / Airtel (Coming Soon)</button>
+
+<p style="margin-top:20px; opacity:0.7;">
+Payments via Mobile Money will be enabled shortly.
+</p>

@@ -2,28 +2,47 @@
 {% block title %}Game On Tips{% endblock %}
 
 {% block content %}
+
 <h1 class="main-title">Game On Tips</h1>
+
 {% if session.get("admin") %}
   <div style="margin:20px; text-align:center;">
     <a href="/admin" class="button admin-btn">Go to Admin Dashboard</a>
   </div>
 {% endif %}
 
-
 <div class="plans">
 
+    <!-- Ordinary Plan -->
     <div class="plan-card">
         <h2>Ordinary Tips</h2>
-        <p>Reliable daily tips for consistent wins.</p>
-        <a href="/subscribe?plan=ordinary" class="button">Subscribe</a>
+        <p>Reliable daily tips for consistent wins.<br><strong>30,000 UGX for 30 days</strong></p>
+
+        <a href="https://wa.me/256776857288?text=Hello%20I%20want%20to%20subscribe%20to%20ORDINARY%20tips%20(UGX%2030,000)."
+           target="_blank"
+           class="btn ordinary-btn">
+           Subscribe
+        </a>
     </div>
 
+    <!-- VIP Plan -->
     <div class="plan-card vip">
         <h2>VIP Tips</h2>
-        <p>High-confidence expert predictions.</p>
-        <a href="/subscribe?plan=vip" class="button vip-btn">Go VIP</a>
+        <p>High-confidence expert predictions.<br><strong>50,000 UGX</strong></p>
+
+        <a href="https://wa.me/256776857288?text=Hello%20I%20want%20to%20subscribe%20to%20VIP%20tips%20(UGX%2050,000)."
+           target="_blank"
+           class="btn vip-btn">
+           Go VIP
+        </a>
     </div>
 
+</div>
+
+<div class="payment-note">
+  🔐 Payments via Mobile Money<br>
+  💬 Access delivered via WhatsApp<br>
+  👥 Added to private group after payment
 </div>
 
 {% if is_subscribed %}
@@ -41,8 +60,11 @@
     {% endif %}
 {% else %}
     <div class="locked">
-        <h3>🔒 Upcoming Matches Locked</h3>
-        <p>Subscribe to view upcoming matches and predictions.</p>
+        <h3>Tap the required offer</h3>
+        <p>
+            You will be redirected to WhatsApp where you will talk to the admin
+            and subscribe for the tips.
+        </p>
     </div>
 {% endif %}
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIP Tips | Game On Tips</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 VIP Tips</h1>
+    <p class="price">UGX 50,000</p>
+
+    {% if matches %}
+        <div class="tips-container">
+            {% for match in matches %}
+                <div class="tip-card gold">
+                    <h3>{{ match.home_team }} vs {{ match.away_team }}</h3>
+                    <small>{{ match.league }} | {{ match.kickoff_time.strftime("%d %b %Y %H:%M") }}</small>
+
+                    <ul>
+                        {% for market in match.markets %}
+                            <li>
+                                {{ market.market_type }} –
+                                <b>{{ market.pick }}</b>
+                                @ {{ market.odds }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <span class="badge">VIP</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="locked">
+            <p>No VIP tips available yet.</p>
+        </div>
+    {% endif %}
+
+    <a href="/" class="back">⬅ Back Home</a>
+</div>
+
+</body>
+</html>
+

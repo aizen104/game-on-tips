@@ -1,311 +1,296 @@
+/* ===============================
+   GLOBAL RESET
+================================ */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ===============================
+   BODY
+================================ */
 body {
     background: #000;
-    color: #0f0;
-    font-family: Arial, Helvetica, sans-serif;
+    color: #00ff66;
     min-height: 100vh;
+    padding: 20px;
 }
 
+/* ===============================
+   CONTAINER
+================================ */
 .container {
+    max-width: 1100px;
+    margin: auto;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 70px;
 }
 
-.title {
-    font-size: 48px;
+/* ===============================
+   TITLES
+================================ */
+.title,
+h1 {
+    font-size: 2.8rem;
     letter-spacing: 3px;
+    text-shadow: 0 0 12px rgba(0,255,102,0.6);
 }
 
 .subtitle {
     margin-top: 10px;
     color: #9f9;
+    font-size: 1rem;
 }
 
-.cards {
+/* ===============================
+   CARDS LAYOUT
+================================ */
+.cards,
+.cards-container,
+.plans {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-top: 60px;
+    gap: 30px;
+    margin-top: 50px;
     flex-wrap: wrap;
 }
 
-.card {
-    width: 260px;
-    padding: 30px;
-    border: 2px solid #0f0;
-    text-decoration: none;
-    color: #0f0;
-    transition: all 0.3s ease;
+/* ===============================
+   CARD BASE
+================================ */
+.card,
+.plan-card,
+.tip-card {
+    width: 280px;
+    padding: 28px;
+    border-radius: 14px;
+    border: 2px solid #00ff66;
+    background: linear-gradient(180deg, #050505, #020202);
+    color: #00ff66;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-.card h2 {
-    margin-bottom: 15px;
+/* Glow layer (FIXED) */
+.card::before,
+.plan-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top,
+        rgba(0,255,102,0.25),
+        transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; /* ✅ FIX */
 }
 
-.card p {
-    line-height: 1.6;
+/* Hover effect */
+.card:hover::before,
+.plan-card:hover::before {
+    opacity: 1;
 }
 
-.card:hover {
-    background: #0f0;
+.card:hover,
+.plan-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    background: #00ff66;
     color: #000;
-    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(0,255,102,0.6);
 }
 
+/* ===============================
+   VIP CARD
+================================ */
 .vip {
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+    border-color: gold;
+    box-shadow: 0 0 35px rgba(255,215,0,0.5);
+    animation: vipPulse 2.8s infinite;
 }
 
-.ordinary {
-    opacity: 0.85;
+@keyframes vipPulse {
+    0% { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
+    50% { box-shadow: 0 0 45px rgba(255,215,0,0.9); }
+    100% { box-shadow: 0 0 20px rgba(255,215,0,0.4); }
 }
 
+.vip:hover {
+    transform: translateY(-10px) scale(1.06);
+}
+
+/* ===============================
+   TEXT
+================================ */
+.card h2,
+.plan-card h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.card p,
+.plan-card p {
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ===============================
+   PRICE & BADGES
+================================ */
 .price {
-    font-size: 22px;
+    font-size: 1.4rem;
     margin: 15px 0;
     font-weight: bold;
+    color: gold;
 }
 
 .badge {
     display: inline-block;
-    margin-top: 15px;
-    padding: 6px 12px;
-    background: #0f0;
+    margin-top: 14px;
+    padding: 6px 14px;
+    background: gold;
     color: #000;
     font-size: 12px;
+    border-radius: 20px;
     font-weight: bold;
 }
 
-.vip {
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
-    transform: scale(1.05);
-}
-
-.vip:hover {
-    transform: scale(1.08);
-}
-.bet-card {
-    border: 1px solid #0f0;
-    padding: 15px;
-    margin-bottom: 15px;
-    background: #111;
-}
-
-.match {
-    font-size: 16px;
-    margin-bottom: 8px;
-}
-
-.market {
-    font-size: 14px;
-    color: #9f9;
-}
-
-.odds {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.odds span {
-    background: #0f0;
-    color: #000;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-/* GLOBAL RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-/* BODY */
-body {
-    background: #000;
-    color: #0f0;
-    padding: 20px;
-}
-
-/* HEADINGS */
-h1, h2, h3 {
-    color: #0f0;
-    margin-bottom: 15px;
-}
-
-/* LINKS */
-a {
-    color: #0f0;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* CONTAINERS / CARDS */
-.card, .bet-card, form, div {
-    background: #111;
-    border: 1px solid #0f0;
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-/* FORMS */
-input, select {
+/* ===============================
+   BUTTONS (FIXED)
+================================ */
+button,
+.button,
+.btn {
+    display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 12px;
-    background: #000;
-    border: 1px solid #0f0;
-    color: #0f0;
-    border-radius: 5px;
-}
-
-input::placeholder {
-    color: #6f6;
-}
-
-/* BUTTONS */
-button {
-    background: #0f0;
-    color: #000;
+    padding: 14px;
+    border-radius: 10px;
     border: none;
-    padding: 10px;
-    width: 100%;
     font-weight: bold;
-    border-radius: 6px;
     cursor: pointer;
-}
-
-button:hover {
-    background: #6f6;
-}
-
-/* BET TIP STYLE */
-.bet-card {
-    box-shadow: 0 0 10px rgba(0,255,0,0.2);
-}
-
-.market {
-    font-size: 14px;
-    color: #9f9;
-}
-
-.odds span {
-    background: #0f0;
-    color: #000;
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-
-/* FOOTER TEXT */
-small {
-    color: #7f7;
-}
-.plans {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    margin: 40px 0;
-}
-
-.plan-card {
-    border: 2px solid #00ff00;
-    border-radius: 12px;
-    padding: 30px;
-    width: 300px;
-    text-align: center;
-    background: #050505;
-}
-
-.plan-card.vip {
-    border-color: gold;
-}
-
-.plan-card h2 {
-    color: #00ff00;
-}
-
-.plan-card.vip h2 {
-    color: gold;
-}
-
-.button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-.vip-btn {
-    border-color: gold;
-    color: gold;
-}
-
-.match-card {
-    border: 1px solid #00ff00;
-    padding: 10px;
-    margin: 10px auto;
-    width: 60%;
-    border-radius: 6px;
-}
-
-.locked {
-    text-align: center;
-    border: 1px dashed #00ff00;
-    padding: 20px;
-    margin-top: 30px;
-}
-.match-box {
-  border: 1px solid #00ff00;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-}
-
-.match-box h4 {
-  color: #00ff00;
-}
-
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-li {
-  padding: 4px 0;
-}
-.admin-btn {
-    display: inline-block;
     background: #00ff66;
     color: #000;
-    padding: 10px 18px;
+    transition: all 0.3s ease;
+    position: relative;  /* ✅ FIX */
+    z-index: 5;          /* ✅ FIX */
+    pointer-events: auto;
+    text-decoration: none;
+}
+
+button:hover,
+.button:hover,
+.btn:hover {
+    background: #66ff99;
+    box-shadow: 0 0 20px rgba(0,255,102,0.8);
+}
+
+.btn.disabled {
+    background: #333;
+    color: #777;
+    cursor: not-allowed;
+}
+
+/* ===============================
+   BET TIPS
+================================ */
+.bet-card,
+.match-box {
+    border: 1px solid #00ff66;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background: #050505;
+    box-shadow: 0 0 15px rgba(0,255,102,0.25);
+}
+
+.market {
+    font-size: 14px;
+    color: #9f9;
+}
+
+.odds span {
+    background: #00ff66;
+    color: #000;
+    padding: 4px 8px;
     border-radius: 6px;
     font-weight: bold;
+}
+
+/* ===============================
+   ADMIN BUTTON
+================================ */
+.admin-btn {
+    background: gold;
+    color: #000;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: bold;
     text-decoration: none;
-    float: right;
-    margin-top: -40px;
 }
 
 .admin-btn:hover {
-    background: #00cc55;
+    background: #ffcc33;
 }
-.admin-btn {
-  background: #ff9800;
-  color: black;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
+
+/* ===============================
+   SAFETY FIX
+================================ */
+.plan-card {
+    position: relative;
+}
+
+.plan-card * {
+    pointer-events: auto;
+}
+
+/* ===============================
+   MOBILE FIXES
+================================ */
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding-top: 40px;
+    }
+
+    .cards,
+    .cards-container,
+    .plans {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .card,
+    .plan-card,
+    .tip-card {
+        width: 100%;
+    }
+
+    h1,
+    .title {
+        font-size: 1.7rem;
+    }
+
+    button,
+    .btn,
+    .button {
+        padding: 16px;
+        font-size: 1rem;
+    }
+}
+
+/* ===============================
+   ACCESSIBILITY
+================================ */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }
 
