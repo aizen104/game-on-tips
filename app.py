@@ -11,9 +11,7 @@ from models import db, User, Match, Market
 # =========================
 app = Flask(__name__)
 load_dotenv()
-print("KEY:", os.getenv("PESAPAL_CONSUMER_KEY"))
-print("SECRET:", os.getenv("PESAPAL_CONSUMER_SECRET"))
-print("ENV:", os.getenv("PESAPAL_ENV"))
+
 
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "supersecret")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///game_on_tips.db"
@@ -36,11 +34,10 @@ if PESAPAL_ENV == "sandbox":
 else:
     AUTH_URL = "https://pay.pesapal.com/v3/api/Auth/RequestToken"
 
-PESAPAL_CONSUMER_KEY = os.getenv("PESAPAL_CONSUMER_KEY")
-PESAPAL_CONSUMER_SECRET = os.getenv("PESAPAL_CONSUMER_SECRET")
+PESAPAL_KEY = os.getenv("PESAPAL_KEY")
+PESAPAL_SECRET = os.getenv("PESAPAL_SECRET")
 
-if not PESAPAL_CONSUMER_KEY or not PESAPAL_CONSUMER_SECRET:
-    raise Exception("Pesapal keys not loaded from environment")
+PESAPAL_ENABLED = bool(PESAPAL_KEY and PESAPAL_SECRET)
 
 def register_ipn():
     token = get_pesapal_token()
